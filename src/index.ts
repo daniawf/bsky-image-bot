@@ -22,11 +22,11 @@ function postTextFromImageName(imageName: string): string {
   
   // Create text based on image
   if(imageName == "Yellow Amogus.jpg") {
-	  resultText = currentText.concat(imageName, " from Among Us 2023\n Among Us Stamp #1432");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2023\n Among Us Stamp #1432");
   } else if(imageName == "Red Amogus.jpg") {
-	  resultText = currentText.concat(imageName, " from Among Us 2022\n Among Us Stamp #133");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2022\n Among Us Stamp #133");
   } else if(imageName == "White Amogus.jpg") {
-	  resultText = currentText.concat(imageName, " from Among Us 2021\n Among Us Stamp #16");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2021\n Among Us Stamp #16");
   };
    
    return resultText;

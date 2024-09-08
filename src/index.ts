@@ -21,12 +21,14 @@ function postTextFromImageName(imageName: string): string {
   let resultText: string = "Result Placeholder";
   
   // Create text based on image
+  // Only really need to edit the imageName and resultText
+  
   if(imageName == "Yellow Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2023\n Among Us Stamp #1432");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2023\nAmong Us Stamp #1432");
   } else if(imageName == "Red Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2022\n Among Us Stamp #133");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2022\nAmong Us Stamp #133");
   } else if(imageName == "White Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2021\n Among Us Stamp #16");
+	  resultText = currentText.concat(imageNameClear, " from Among Us 2021\nAmong Us Stamp #16");
   };
    
    return resultText;

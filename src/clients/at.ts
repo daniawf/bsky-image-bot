@@ -124,6 +124,11 @@ async function postImage({ path, text, altText }: PostImageOptions) {
           image: testUpload.data.blob,
           alt: altText,
         },
+		
+		{
+          image: testUpload.data.blob,
+          alt: altText,
+        },
       ],
       $type: 'app.bsky.embed.images',
     },

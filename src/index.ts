@@ -15,18 +15,21 @@ function postTextFromImageName(imageName: string): string {
     month: 'long',
     day: 'numeric',
   });
-  let currentText: string = "Current Text Placeholder";
-  let result: string = "Result Placeholder";
+  
+  let currentText: string = "";
+  let imageNameClear: string = imageName.replace('.jpg', '');
+  let resultText: string = "Result Placeholder";
+  
   // Create text based on image
   if(imageName == "Yellow Amogus.jpg") {
-	  result = currentText.concat(imageName, " from Among Us 2023\n Among Us Stamp #1432");
+	  resultText = currentText.concat(imageName, " from Among Us 2023\n Among Us Stamp #1432");
   } else if(imageName == "Red Amogus.jpg") {
-	  result = currentText.concat(imageName, " from Among Us 2022\n Among Us Stamp #133");
+	  resultText = currentText.concat(imageName, " from Among Us 2022\n Among Us Stamp #133");
   } else if(imageName == "White Amogus.jpg") {
-	  result = currentText.concat(imageName, " from Among Us 2021\n Among Us Stamp #16");
+	  resultText = currentText.concat(imageName, " from Among Us 2021\n Among Us Stamp #16");
   };
    
-   return result;
+   return resultText;
   // Format the date
   //return "hi trying to edit the text"; //formatter.format(date);
 }

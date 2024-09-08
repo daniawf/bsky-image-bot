@@ -15,9 +15,18 @@ function postTextFromImageName(imageName: string): string {
     month: 'long',
     day: 'numeric',
   });
+  
+  // Create text based on image
+  if(imageName == "Yellow Amogus") {
+	  return string.concat(imageName, " from Among Us 2023\n Among Us Stamp #1432");
+  } else if(imageName == "Red Amogus") {
+	  return string.concat(imageName, " from Among Us 2022\n Among Us Stamp #1331");
+  } else if(imageName == "White Amogus") {
+	  return string.concat(imageName, " from Among Us 2023\n Among Us Stamp #124");
+  };
 
   // Format the date
-  return "hi trying to edit the text"; //formatter.format(date);
+  //return "hi trying to edit the text"; //formatter.format(date);
 }
 
 // EDIT THIS!

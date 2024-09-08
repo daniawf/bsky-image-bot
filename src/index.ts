@@ -17,7 +17,7 @@ function postTextFromImageName(imageName: string): string {
   });
 
   // Format the date
-  return formatter.format(date);
+  return "hi trying to edit the text"; //formatter.format(date);
 }
 
 // EDIT THIS!

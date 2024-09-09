@@ -16,19 +16,21 @@ function postTextFromImageName(imageName: string): string {
     day: 'numeric',
   });
   
+  let typeSymbol: string
+  
   let currentText: string = "";
-  let imageNameClear: string = imageName.replace('.jpg', '');
+  let imageNameBase: string = imageName.replace(/\.(jpg|jpeg|png|gif|bmp)$/i, '');
   let resultText: string = "Result Placeholder";
   
   // Create text based on image
   // Only really need to edit the imageName and resultText
   
-  if(imageName == "Yellow Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2023\nAmong Us Stamp #1432");
-  } else if(imageName == "Red Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2022\nAmong Us Stamp #133");
-  } else if(imageName == "White Amogus.jpg") {
-	  resultText = currentText.concat(imageNameClear, " from Among Us 2021\nAmong Us Stamp #16");
+  if(imageName == "453_1.png") {
+	  resultText = currentText.concat("✿ AMGUS #453 - Party Collectibles (2023)");
+  } else if(imageName == "MM3_1.jpg") {
+	  resultText = currentText.concat("✦ AMGUS #MM3 - Halloween Spooky (2009)");
+  } else if(imageName == "YouCanRlyPutAnythingHere_1.png") {
+	  resultText = currentText.concat("☁︎ AMGUS InsertAnythingHere - Spooky Collectibles (2020)");
   };
    
    return resultText;
@@ -50,6 +52,7 @@ async function main() {
 
   await postImage({
     path: nextImage.absolutePath,
+	path2: nextImage.absolutePath,
     text: postTextFromImageName(nextImage.imageName),
     altText: altTextFromImageName(nextImage.imageName),
   });

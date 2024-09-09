@@ -4,7 +4,7 @@ on:
   
    workflow_dispatch: 
    schedule:
-   - cron: "*/15 * * * *"
+   - cron: "*/10 * * * *"
 
 jobs:
   # On some job, do some stuff and persist variables meant to be re-used in other jobs        

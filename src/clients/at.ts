@@ -21,6 +21,19 @@ async function loadImageData(path: fs.PathLike) {
   return { data: new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) };
 }
 
+async function loadImageData2(path2: fs.PathLike) {
+  // Read the file from the provided path2
+  let buffer = await readFile(path2);
+
+  // Check file size, 1MB = 1024*1024 bytes
+  if (buffer.byteLength > 1024 * 1024) {
+    buffer = await resizeImage(buffer);
+  }
+
+  // Convert the buffer to a Uint8Array and return it
+  return { data2: new Uint8Array(buffer.buffer, buffer.byteOffset, buffer.byteLength) };
+}
+
 async function resizeImage(buffer: Buffer): Promise<Buffer> {
   let newSize = 0.9; // Start with 90% of original size
   let outputBuffer = buffer;
@@ -101,10 +114,11 @@ async function fetchHandler(
 
 type PostImageOptions = {
   path: fs.PathLike;
+  path2: fs.PathLike;
   text: string;
   altText: string;
 };
-async function postImage({ path, text, altText }: PostImageOptions) {
+async function postImage({ path, path2, text, altText }: PostImageOptions) {
   const agent = new BskyAgent({ service: 'https://bsky.social' });
   BskyAgent.configure({
     fetch: fetchHandler,
@@ -114,8 +128,10 @@ async function postImage({ path, text, altText }: PostImageOptions) {
     password: process.env.BSKY_PASSWORD || 'BSKY_PASSWORD missing',
   });
   const { data } = await loadImageData(path);
+  const { data2 } = await loadImageData2(path2);
 
   const testUpload = await agent.uploadBlob(data, { encoding: 'image/jpg' });
+  const testUpload = await agent.uploadBlob(data2, { encoding: 'image/jpg' });
   await agent.post({
     text: text,
     embed: {
@@ -127,7 +143,7 @@ async function postImage({ path, text, altText }: PostImageOptions) {
         },
 		//Second Image
 		{
-          image: testUpload.data.blob,
+          image: testUpload.data2.blob,
           alt: altText,
         },
       ],

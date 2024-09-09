@@ -9,6 +9,7 @@ type GetNextImageOptions = {
 type NextImage = {
   imageName: string;
   absolutePath: string;
+  absolutePath2: string;
   loopedAround: boolean;
 };
 
@@ -18,10 +19,14 @@ async function getNextImage(options?: GetNextImageOptions): Promise<NextImage> {
   const imagesDir = path.resolve(__dirname, '../../imagequeue');
   const imageFiles = (await readdir(imagesDir)).sort();
   const imageRegex = /\.(jpg|jpeg|png|gif|bmp)$/i;
-  const validImageFiles = imageFiles.filter((filename) => imageRegex.test(filename));
+
+  // Filter images to only those ending with _1 and have a valid image extension
+  const validImageFiles = imageFiles.filter((filename) => {
+    return imageRegex.test(filename) && /_1\.(jpg|jpeg|png|gif|bmp)$/i.test(filename);
+  });
 
   if (validImageFiles.length === 0) {
-    throw new Error('No image files found in the directory.');
+    throw new Error('No image files ending with _1 found in the directory.');
   }
 
   let nextImageIndex = 0; // default value if no lastImageName provided, or it's not found
@@ -39,11 +44,16 @@ async function getNextImage(options?: GetNextImageOptions): Promise<NextImage> {
   }
 
   const imageName = validImageFiles[nextImageIndex];
-  const absolutePath = path.join(imagesDir, imageName);
+  const imageNameBase = imageName.replace(/\.(jpg|jpeg|png|gif|bmp)$/i, ''); // Remove file extension
+  const imageNameUnNumbered = imageNameBase.replace(/_1$/, ''); // Remove '_1' suffix
+
+  const absolutePath = path.join(imagesDir, imageNameUnNumbered, "_1");
+  const absolutePath2 = path.join(imagesDir, imageNameUnNumbered, "_2");
 
   return {
     imageName,
     absolutePath,
+	absolutePath2,
     loopedAround,
   };
 }

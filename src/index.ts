@@ -52,7 +52,7 @@ async function main() {
 
   await postImage({
     path: nextImage.absolutePath,
-	path2: nextImage.absolutePath,
+	path2: nextImage.absolutePath2,
     text: postTextFromImageName(nextImage.imageName),
     altText: altTextFromImageName(nextImage.imageName),
   });

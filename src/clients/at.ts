@@ -120,11 +120,12 @@ async function postImage({ path, text, altText }: PostImageOptions) {
     text: text,
     embed: {
       images: [
+		//First Image
         {
           image: testUpload.data.blob,
           alt: altText,
         },
-		
+		//Second Image
 		{
           image: testUpload.data.blob,
           alt: altText,

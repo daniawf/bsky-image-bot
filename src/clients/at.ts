@@ -143,7 +143,7 @@ async function postImage({ path, path2, text, altText }: PostImageOptions) {
         },
 		//Second Image
 		{
-          image: testUpload2.data2.blob,
+          image: testUpload2.data.blob,
           alt: altText,
         },
       ],

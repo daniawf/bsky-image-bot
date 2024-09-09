@@ -47,8 +47,8 @@ async function getNextImage(options?: GetNextImageOptions): Promise<NextImage> {
   const imageNameBase = imageName.replace(/\.(jpg|jpeg|png|gif|bmp)$/i, ''); // Remove file extension
   const imageNameUnNumbered = imageNameBase.replace(/_1$/, ''); // Remove '_1' suffix
 
-  absolutePath = absolutePath.concat(imagesDir, "/", imageNameBase, ".jpg");
-  absolutePath2 = absolutePath2.concat(imagesDir, "/", imageNameUnNumbered, "_2.jpg");
+  let absolutePath = absolutePath.concat(imagesDir, "/", imageNameBase, ".jpg");
+  let absolutePath2 = absolutePath2.concat(imagesDir, "/", imageNameUnNumbered, "_2.jpg");
 
   return {
     imageName,

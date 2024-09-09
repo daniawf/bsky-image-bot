@@ -131,7 +131,7 @@ async function postImage({ path, path2, text, altText }: PostImageOptions) {
   const { data2 } = await loadImageData2(path2);
 
   const testUpload = await agent.uploadBlob(data, { encoding: 'image/jpg' });
-  const testUpload = await agent.uploadBlob(data2, { encoding: 'image/jpg' });
+  const testUpload2 = await agent.uploadBlob(data2, { encoding: 'image/jpg' });
   await agent.post({
     text: text,
     embed: {
@@ -143,7 +143,7 @@ async function postImage({ path, path2, text, altText }: PostImageOptions) {
         },
 		//Second Image
 		{
-          image: testUpload.data2.blob,
+          image: testUpload2.data2.blob,
           alt: altText,
         },
       ],

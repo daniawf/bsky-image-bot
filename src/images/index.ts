@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as path2 from 'path2';
 import * as util from 'util';
 
 type GetNextImageOptions = {
@@ -48,9 +49,9 @@ async function getNextImage(options?: GetNextImageOptions): Promise<NextImage> {
   const imageNameUnNumbered = imageNameBase.replace(/_1$/, ''); // Remove '_1' suffix
 
   let absolutePath = "";
-  absolutePath = absolutePath.concat(imagesDir, "/", imageNameBase, ".jpg");
+  absolutePath = absolutePath.concat(imagesDir, "/", imageNameBase, path.extname(imageName).toLowerCase());
   let absolutePath2 = "";
-  absolutePath2 = absolutePath2.concat(imagesDir, "/", imageNameUnNumbered, "_2.jpg");
+  absolutePath2 = absolutePath2.concat(imagesDir, "/", imageNameUnNumbered, "_2", path.extname(imageName).toLowerCase());
 
   return {
     imageName,

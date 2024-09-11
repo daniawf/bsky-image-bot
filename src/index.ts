@@ -28,7 +28,7 @@ function postTextFromImageName(imageName: string): string {
 
 // EDIT THIS FOR ALT TEXT
 function altTextFromImageName(imageName: string): string {
-  return null;// 'Image from ' + postTextFromImageName(imageName);
+  return "";// 'Image from ' + postTextFromImageName(imageName);
 }
 
 // Shouldn't have to edit this.

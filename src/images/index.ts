@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as path2 from 'path2';
 import * as util from 'util';
 
 type GetNextImageOptions = {

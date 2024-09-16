@@ -1,18 +1,29 @@
 name: 'bsky-image-bot Post Next Image'
-  
+
 on:
-  
-   workflow_dispatch: 
-   schedule:
-   - cron: "*/10 * * * *"
+  workflow_dispatch:
+  schedule:
+    - cron: "* 1 * * *"
 
 jobs:
-  # On some job, do some stuff and persist variables meant to be re-used in other jobs        
   post-next-image:
     name: Post Next Image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/yarn
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-node-
+            ${{ runner.os }}-
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -34,10 +45,19 @@ jobs:
           echo "Previous image name: $LAST_IMAGE_NAME"
           echo "Authenticating with user identifier: $BSKY_IDENTIFIER"
           NEW_LAST_IMAGE_NAME=$(yarn --silent run start)
+          if [ $? -ne 0 ]; then
+            echo "Error: Failed to post new image"
+            exit 1
+          fi
           echo "NEW_LAST_IMAGE_NAME=$NEW_LAST_IMAGE_NAME" >> $GITHUB_ENV
 
-      - uses: action-pack/set-variable@v1
+      - name: Set LAST_IMAGE_NAME
+        uses: action-pack/set-variable@v1
         with:
           name: 'LAST_IMAGE_NAME'
           value: ${{ env.NEW_LAST_IMAGE_NAME }}
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - name: Log current state
+        run: |
+          echo "Current LAST_IMAGE_NAME: ${{ env.LAST_IMAGE_NAME }}"
